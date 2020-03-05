@@ -102,6 +102,7 @@ def getfile():
 
 
 def loaddict():
+    global burydict
     pf = getfile()
     if os.path.isfile(pf):
         with open(pf, 'rb') as PO:
@@ -115,6 +116,7 @@ def loaddict():
 
 
 def savedict():
+    global burydict
     pf = getfile()
     # pp(burydict)
     # prevent error after deleting add-on
