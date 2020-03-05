@@ -425,6 +425,11 @@ def myadd(self):
     a.setDefaultWidget(cb_reset)
     outerm.addAction(a)
 
+    label = QLabel("sibling spread days:")
+    action = QWidgetAction(self.editor.widget)
+    action.setDefaultWidget(label)
+    outerm.addAction(action)
+
     sb = QSpinBox(outerm)
     sb.setMinimum(0)
     sb.setValue(gc("Siblings_spread_days"))
