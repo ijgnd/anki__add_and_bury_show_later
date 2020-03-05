@@ -269,7 +269,7 @@ def add_and_reschedule(self, mindays, maxdays, close=False):
         if mindaysMod >= 1:
             try:
                 # running a non-existent hook doesn't throw an error
-                import  __import__("323586997")
+                __import__("323586997")
             except:
                 self.mw.col.sched.reschedNewCards([c.id], factor, mindaysMod, maxdaysMod)
             else:
