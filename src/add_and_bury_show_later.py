@@ -16,27 +16,21 @@ from aqt.utils import (
     getText,
     showInfo,
     tooltip)
-from anki.lang import _
 from anki.sound import clearAudioQueue
 from anki.hooks import addHook, wrap
 
 from .libs import inflect
-
 from .config import gc
+from . import rc_icons
 
 ii = inflect.engine()
 
 
+addon_path = os.path.dirname(__file__)
+user_files_folder = os.path.join(addon_path, "user_files")
 
 
-
-"""
-TODO
-how to load icon in stylesheet?
-- url(" data:image/png;base64,%s");  But https://bugreports.qt.io/browse/QTBUG-51081
-- url("icons/right.svg");
-- qrc:
-"""
+# icons: this doesn't work url(" data:image/png;base64,%s"); see  https://bugreports.qt.io/browse/QTBUG-51081
 
 basic_stylesheet = """
 QMenu::item {
@@ -67,7 +61,7 @@ QSpinBox {
 QSpinBox::down-button {
     subcontrol-origin: margin;
     subcontrol-position: center left;
-    image: url("icons/right.svg");
+    image: url(%s);
     background-color: #ABABAB;
     border: 1px solid black;
     padding:0px;
@@ -80,7 +74,7 @@ QSpinBox::down-button {
 QSpinBox::up-button {
     subcontrol-origin: margin;
     subcontrol-position: center right;
-    image: url("icons/right.svg");
+    image: url(:/bsl/right.svg);
     background-color: #ABABAB;
     border: 1px solid black;
     padding:0px;
@@ -89,11 +83,7 @@ QSpinBox::up-button {
     height: 24px;
     width: 50px;
 }
-"""
-
-
-addon_path = os.path.dirname(__file__)
-user_files_folder = os.path.join(addon_path, "user_files")
+""" % (os.path.join(addon_path, "icons/left.svg")) # , os.path.join(addon_path, "icons/right.svg"))
 
 
 def getfile():
@@ -335,14 +325,14 @@ def _add_as_nth_new(self, newindex):
     note = self.addNote(note)
     if not note:
         return
-    tooltip(_("Added as first new"), period=500)
+    tooltip("Added as first new", period=500)
     # stop anything playing
     clearAudioQueue()
     self.my_reset_KeepModel_compa()
     self.mw.col.autosave()
     cids = [int(c.id) for c in note.cards()]
     # browser.py -  reposition
-    # self.mw.checkpoint(_("Reposition"))
+    # self.mw.checkpoint("Reposition")
     aqt.mw.col.sched.sortCards(
         cids, start=newindex, step=1,
         shuffle=False, shift=True)
@@ -360,7 +350,7 @@ def _addCardsMod(self):
     note = self.addNote(note)
     if not note:
         return
-    tooltip(_("Added"), period=500)
+    tooltip("Added", period=500)
     # stop anything playing
     clearAudioQueue()
     self.my_reset_KeepModel_compa()

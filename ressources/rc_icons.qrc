@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="bsl">
+    <file>left.svg</file>
+    <file>right.svg</file>
+  </qresource>
+</RCC>
