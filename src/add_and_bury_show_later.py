@@ -31,6 +31,12 @@ user_files_folder = os.path.join(addon_path, "user_files")
 
 
 # icons: this doesn't work url(" data:image/png;base64,%s"); see  https://bugreports.qt.io/browse/QTBUG-51081
+#
+# for absolute paths (assuming that they are in a subfolder icons of my src folder) it would be
+# image: url(%s);
+# image: url(%s);
+#  ...
+# % (os.path.join(addon_path, "icons/left.svg") , os.path.join(addon_path, "icons/right.svg"))
 
 basic_stylesheet = """
 QMenu::item {
@@ -61,7 +67,7 @@ QSpinBox {
 QSpinBox::down-button {
     subcontrol-origin: margin;
     subcontrol-position: center left;
-    image: url(%s);
+    image: url(:/bsl/left.svg);
     background-color: #ABABAB;
     border: 1px solid black;
     padding:0px;
@@ -83,7 +89,7 @@ QSpinBox::up-button {
     height: 24px;
     width: 50px;
 }
-""" % (os.path.join(addon_path, "icons/left.svg")) # , os.path.join(addon_path, "icons/right.svg"))
+""" 
 
 
 def getfile():
